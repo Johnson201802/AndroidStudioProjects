@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    TargetPlatform platform = defaultTargetPlatform;
+    TargetPlatform platform = defaultTargetPlatform; 
     if (platform != TargetPlatform.iOS) {
       SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
