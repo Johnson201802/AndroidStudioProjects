@@ -3,10 +3,67 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 void main(){
-  runApp(new Myapp());
+  runApp(new MyApp2());
+}
+
+class MyApp2 extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() {
+    return _MyHomePageState();
+  }
+                                                                                                    
+}
+
+class _MyHomePageState extends State{
+  var currentIndex = 0;
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+
+    TargetPlatform platform = defaultTargetPlatform;
+    if (platform != TargetPlatform.iOS) {
+      SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark
+      );
+      SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+    }
+
+    return MaterialApp(
+      title: "卧槽",
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("卧槽，Flutter!"),
+        ),
+        body: Center(
+          child: Text("啦啦啦"),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: Colors.blue,
+          unselectedItemColor: Colors.black26,
+          type: BottomNavigationBarType.fixed,
+          currentIndex: currentIndex,
+          onTap: (index){
+            setState(() {
+              this.currentIndex = index;
+            });
+          },
+          items: [
+            BottomNavigationBarItem(icon: Icon(Icons.home),label:"首页",),
+            BottomNavigationBarItem(icon: Icon(Icons.crop_square_rounded),label:"圈子"),
+            BottomNavigationBarItem(icon: Icon(Icons.message_rounded),label:"消息"),
+            BottomNavigationBarItem(icon: Icon(Icons.person),label:"我的"),
+          ],
+        ),
+      ),
+    );
+  }
+
 }
 
 class Myapp extends StatelessWidget{
+  var currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     TargetPlatform platform = defaultTargetPlatform;
@@ -20,15 +77,31 @@ class Myapp extends StatelessWidget{
 
     return MaterialApp(
       title: "卧槽，world！",
+      debugShowCheckedModeBanner: false,
       home:Scaffold(
         appBar: AppBar(
           title: Text("我勒个擦"),
         ),
-        body: testGridView()
+        body: TestImage(),
+        bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: Colors.blue,
+          unselectedItemColor: Colors.black26,
+          type: BottomNavigationBarType.fixed,
+          currentIndex: currentIndex,
+          onTap: (index){
+            this.currentIndex = index;
+          },
+          items: [
+            BottomNavigationBarItem(icon: Icon(Icons.home),label:"首页",),
+            BottomNavigationBarItem(icon: Icon(Icons.crop_square_rounded),label:"圈子"),
+            BottomNavigationBarItem(icon: Icon(Icons.message_rounded),label:"消息"),
+            BottomNavigationBarItem(icon: Icon(Icons.person),label:"我的"),
+          ],
+        ),
       ),
         theme: ThemeData(
-          primarySwatch: Colors.blue
-        )
+            primarySwatch: Colors.blue
+        ),
     );
   }
 }
@@ -163,5 +236,37 @@ class testGridView extends StatelessWidget{
       color: Colors.blue,
     );
   }
+
+}
+
+class Test2 extends StatefulWidget{
+  @override
+  _Test2State createState(){
+    return _Test2State();
+  }
+
+
+}
+
+class _Test2State extends State{
+  int _favoriteCount = 55;
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+
+    return Column(children:[
+      Text("hello，flutter！{$_favoriteCount}"),
+      Icon(Icons.add_a_photo,size: 30,color: Colors.blue),
+      RaisedButton(
+          child: Text("点我"),
+          onPressed: (){
+            setState(() {
+              this._favoriteCount++;
+              print(this._favoriteCount++);
+            });
+          })
+    ]
+ );
+}
 
 }
